@@ -1,0 +1,6 @@
+oauth:
+    key: Dummy
+    secret: secret
+
+event:
+    baseUrl: https://www.appdirect.com/api/integration/v1/events/

@@ -1,8 +1,110 @@
-<html>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="protoDirect">
 <head>
+    <!-- JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
+    <!-- Bootstrap, latest compiled and minified -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
 </head>
 <body>
-Hello world !
+<div class="container">
+
+    <div class="page-header">
+        <h1><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> ProtoDirect
+            <small>Let's play with AppDirect's API !</small>
+        </h1>
+    </div>
+
+    <div class="jumbotron">
+        <h3>Welcome <span th:text="${currentUser.firstName} + ' ' + ${currentUser.lastName}">John Smith</span></h3>
+        <a href="/logout" class="btn btn-default">Logout</a>
+
+        <h3>Account</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                Identifier: <span th:text="${account.accountIdentifier}">dummy-account</span>
+            </div>
+            <div class="col-md-6">
+                Status: <span th:text="${account.status}">DUMMY_STATUS</span>
+            </div>
+        </div>
+
+        <br/>
+
+        <h4>Subscription</h4>
+
+        <div class="row">
+            <div class="col-md-6">
+                Edition code: <span th:text="${account.subscription.editionCode}">dummy-code</span>
+            </div>
+            <div class="col-md-6">
+                Pricing duration: <span th:text="${account.subscription.pricingDuration}">dummy-code</span>
+            </div>
+        </div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Quantity</th>
+                <th>Unit</th>
+            </tr>
+            <tr th:each="item : ${account.subscription.itemList}">
+                <td th:text="${item.quantity}">
+                    99
+                </td>
+                <td th:text="${item.unit}">
+                    user
+                </td>
+            </tr>
+       </table>
+
+        <br/>
+
+        <h4>Marketplace</h4>
+
+        <div class="row">
+            <div class="col-md-6">
+                Partner: <span th:text="${account.marketplace.partner}">ACME</span>
+            </div>
+            <div class="col-md-6">
+                Base URL: <span th:text="${account.marketplace.baseUrl}">https://acme.appdirect.com</span>
+            </div>
+        </div>
+
+        <br/>
+
+        <h4>
+            Account users
+        </h4>
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>UUID</th>
+                <th>OpenId</th>
+            </tr>
+            <tr th:each="user : ${accountUsers}">
+                <td th:text="${user.firstName} + ${user.lastName}">
+                    John Smith
+                </td>
+                <td th:text="${user.email}">
+                    dummy-email
+                </td>
+                <td th:text="${user.uuid}">
+                    dummy-uuid
+                </td>
+                <td th:text="${user.openId}">
+                    dummy-openId
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+
 </body>
 </html>

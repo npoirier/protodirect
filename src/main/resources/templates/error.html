@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="protoDirect">
+<head>
+    <!-- JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <!-- Bootstrap, latest compiled and minified -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header">
+        <h1><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> ProtoDirect
+            <small>Let's play with AppDirect's developer API !</small>
+        </h1>
+    </div>
+
+    <div class="jumbotron">
+        <alert th:text="${message}">Error</alert>
+    </div>
+</div>
+
+
+</body>
+</html>
