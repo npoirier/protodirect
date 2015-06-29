@@ -56,22 +56,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/notify/**")
+                .antMatchers("/notify/**", "/login/", "/logout")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
 
         http
-                .authorizeRequests()
-                .antMatchers("/login/", "/logout")
-                .permitAll()
-                .and()
                 .openidLogin()
                 .permitAll()
                 .authenticationUserDetailsService(
                         openIDAuthenticationToken -> new User(openIDAuthenticationToken.getName(), "", AuthorityUtils.createAuthorityList("ROLE_USER"))
                 )
-                .defaultSuccessUrl("/")
                 .attributeExchange("https://www.appdirect.com.*")
                 .attribute("uuid")
                 .type("https://www.appdirect.com/schema/user/uuid")
@@ -90,7 +85,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterAfter(oauthProviderProcessingFilter(), OpenIDAuthenticationFilter.class);
     }
 
-
     @Bean
     public OAuthProviderProcessingFilter oauthProviderProcessingFilter() {
         ProtectedResourceProcessingFilter filter = new ProtectedResourceProcessingFilter() {
@@ -98,6 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 return new AntPathRequestMatcher("/notify/**").matches(request);
             }
         };
+
         filter.setIgnoreMissingCredentials(false);
         filter.setConsumerDetailsService(consumerDetailsService());
         filter.setTokenServices(providerTokenServices());
